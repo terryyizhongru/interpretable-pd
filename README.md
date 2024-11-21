@@ -1,2 +1,18 @@
-# interpreting-ssl-parkinson-speech
-Official source code of the paper: "Unveiling Interpretability in Self-Supervised Speech Representations for Parkinson’s Diagnosis Support"
+<h1 align="center"><span style="font-weight:normal">Unveiling Interpretability in Self-Supervised Speech Representations for Parkinson’s Diagnosis Support</h1>
+  
+<div align="center">
+  
+[David Gimeno-Gómez](https://scholar.google.es/citations?user=DVRSla8AAAAJ&hl=en), [Catarina Botelho](https://scholar.google.com/citations?user=d-xmVlUAAAAJ&hl=en), [Anna Pompili](https://scholar.google.pt/citations?user=ZiB_o6kAAAAJ&hl=en), [Alberto Abad](https://scholar.google.pt/citations?user=M5hzAIwAAAAJ&hl=en), [Carlos-D. Martínez-Hinarejos](https://scholar.google.es/citations?user=HFKXPH8AAAAJ&hl=en)
+</div>
+
+<div align="center">
+  
+[📘 Introduction](#intro) |
+[🛠️ Data Preparation](#preparation) |
+[💪 Training and Evaluation](#training) |
+[📖 Citation](#citation) |
+[📝 License](#license)
+</div>
+
+
+⚠️ *The paper is under review. Code and documentation will be released as soon as possible!* ⚠️
