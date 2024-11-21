@@ -2,7 +2,7 @@
   
 <div align="center">
   
-[David Gimeno-Gómez](https://scholar.google.es/citations?user=DVRSla8AAAAJ&hl=en), [Catarina Botelho](https://scholar.google.com/citations?user=d-xmVlUAAAAJ&hl=en), [Anna Pompili](https://scholar.google.pt/citations?user=ZiB_o6kAAAAJ&hl=en), [Alberto Abad](https://scholar.google.pt/citations?user=M5hzAIwAAAAJ&hl=en), [Carlos-D. Martínez-Hinarejos](https://scholar.google.es/citations?user=HFKXPH8AAAAJ&hl=en)
+[D. Gimeno-Gómez](https://scholar.google.es/citations?user=DVRSla8AAAAJ&hl=en), [C. Botelho](https://scholar.google.com/citations?user=d-xmVlUAAAAJ&hl=en), [A. Pompili](https://scholar.google.pt/citations?user=ZiB_o6kAAAAJ&hl=en), [A. Abad](https://scholar.google.pt/citations?user=M5hzAIwAAAAJ&hl=en), [C.-D. Martínez-Hinarejos](https://scholar.google.es/citations?user=HFKXPH8AAAAJ&hl=en)
 </div>
 
 <div align="center">
