@@ -14,5 +14,6 @@
 [📝 License](#license)
 </div>
 
-
 ⚠️ *The paper is under review. Code and documentation will be released as soon as possible!* ⚠️
+
+<div align="center"> <img src="docs/figure1.png"  width="720"> </div>
