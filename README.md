@@ -1,4 +1,4 @@
-<h1 align="center"><span style="font-weight:normal">Unveiling Interpretability in Self-Supervised Speech Representations for Parkinson’s Diagnosis Support</h1>
+<h1 align="center"><span style="font-weight:normal">Unveiling Interpretability in Self-Supervised Speech Representations for Parkinson’s Diagnosis Support 🗣️🎙️📝📊</h1>
   
 <div align="center">
   
