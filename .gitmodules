@@ -1,0 +1,3 @@
+[submodule "tools/DisVoice"]
+	path = tools/DisVoice
+	url = https://github.com/jcvasquezc/DisVoice.git
