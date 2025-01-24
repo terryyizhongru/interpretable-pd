@@ -250,7 +250,7 @@ def contrast_attn_score_matrices(attn_scores, output_path):
         cmap=cmap, norm=norm,
     )
 
-    plt.savefig(output_path)
+    plt.savefig(output_path, format='pdf')
 
 def main(args, filter_by_condition=0, output_filename='HC_SUBJECTS'):
 
@@ -311,7 +311,7 @@ if __name__ == "__main__":
 
     # -- fusing attention matrix scores
     attn_scores = {'HC': hc_cross_attn_scores_avg, 'PD': pd_cross_attn_scores_avg}
-    output_path = os.path.join(args.output_dir, 'figures', f'contrast_attn_scores.png')
+    output_path = os.path.join(args.output_dir, 'figures', f'contrast_attn_scores.pdf')
     contrast_attn_score_matrices(attn_scores, output_path)
 
     # -- polarplot for lowlevel informed feature attribution

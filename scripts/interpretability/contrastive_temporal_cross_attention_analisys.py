@@ -59,7 +59,7 @@ def create_contrastive_plot(lineplot_mean_data, output_path, phoneme_alignment, 
     # -- plots
     plt.figure()
 
-    fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(21,7.0), gridspec_kw={'width_ratios': [3, 1]})
+    fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(21,7.0), gridspec_kw={'width_ratios': [3, 1], 'wspace':0.115})
 
     # ax[0].grid()
     # ax[0].set_ylim(-1, 100)
@@ -105,10 +105,23 @@ def create_contrastive_plot(lineplot_mean_data, output_path, phoneme_alignment, 
                 time_lineplot.axvline(phoneme.xmax, color='black', linestyle='--', zorder=3)
 
                 previous_lim = phoneme.xmax
+
         time_lineplot.axvspan(previous_lim, lineplot_mean_data['Time (seconds)'][-1], color='white', alpha=0.6, zorder=100)
 
-    time_lineplot.set_xticks(xticks)
-    time_lineplot.set_xticklabels(xticklabels) # , rotation=30)
+    prelast_lim = phoneme_alignment[-2].xmax
+    last_lim = phoneme_alignment[-1].xmax
+    print('AQUI:', prelast_lim, last_lim, lineplot_mean_data['Time (seconds)'][-1])
+    time_lineplot.axvspan(prelast_lim, last_lim, color='white', alpha=1.0, zorder=100)
+    time_lineplot.axvline(prelast_lim, color='black' if word_level else 'gray', linestyle='--', zorder=200)
+    time_lineplot.set_xlim(left=-0.02, right=prelast_lim+0.02)
+    time_lineplot.set_xticks(xticks[:-1])
+    time_lineplot.set_xticklabels(xticklabels[:-1]) # , rotation=30)
+
+    if word_level:
+        for i, t in enumerate(time_lineplot.get_xticklabels()):
+            if i not in [2,4,9]:
+                t.set_alpha(0.6)
+
     time_lineplot.set_xlabel('')
 
     data_mean_df = data_mean_df.drop(xaxis_title, axis=1)
@@ -120,7 +133,7 @@ def create_contrastive_plot(lineplot_mean_data, output_path, phoneme_alignment, 
     total_barplot.set_xticklabels(rotation=30, labels=data_total_df.index)
 
     sns.move_legend(time_lineplot, "lower center", bbox_to_anchor=(.5, 1), ncol=4, title=None, frameon=False)
-    time_lineplot.figure.savefig(output_path, bbox_inches='tight')
+    time_lineplot.figure.savefig(output_path.replace('.png', '.svg'), bbox_inches='tight', format='svg')
     plt.close()
 
 def load_data_by_condition(args, filter_by_condition):
