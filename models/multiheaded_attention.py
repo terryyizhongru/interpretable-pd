@@ -15,7 +15,7 @@ class MultiHeadedAttention(torch.nn.Module):
 
     """
 
-    def __init__(self, query_dim, key_dim, value_dim, num_heads=8, dropout_rate=0.0, attn_type='cross_ssl_embed'):
+    def __init__(self, query_dim, key_dim, value_dim, num_heads=8, dropout_rate=0.0, attn_type='cross_embed'):
         """Construct an MultiHeadedAttention object."""
         super(MultiHeadedAttention, self).__init__()
         assert query_dim % num_heads == 0
@@ -88,7 +88,7 @@ class MultiHeadedAttention(torch.nn.Module):
         if mask is not None:
             mask = mask.unsqueeze(1).eq(0)
             min_value = torch.finfo(scores.dtype).min
-            if self.attn_type in ['cross_ssl_time']:
+            if self.attn_type in ['cross_time']:
                 mask = mask.permute(0,1,3,2)
             scores = scores.masked_fill(mask, min_value)
             self.attn_scores = torch.softmax(scores, dim=-1).masked_fill(
@@ -101,7 +101,7 @@ class MultiHeadedAttention(torch.nn.Module):
         p_attn = self.dropout(self.attn_scores)
 
         # -- post-score dimension adjustments
-        if self.attn_type in ['cross_ssl_embed', 'cross_ssl_time']:
+        if self.attn_type in ['cross_embed', 'cross_time']:
             p_attn = p_attn.transpose(-2, -1)
 
         x = torch.matmul(p_attn, value)
@@ -129,10 +129,10 @@ class MultiHeadedAttention(torch.nn.Module):
         q, k, v = self.forward_qkv(query, key, value)
 
         # -- pre-score dimension adjustments
-        if self.attn_type == 'cross_ssl_embed':
+        if self.attn_type == 'cross_embed':
             q = q.transpose(-2, -1)
             v = v.transpose(-2, -1)
-        elif self.attn_type != 'cross_ssl_time':
+        elif self.attn_type != 'cross_time':
             k = k.transpose(-2, -1)
 
         scores = torch.matmul(q, k) / math.sqrt(self.d)

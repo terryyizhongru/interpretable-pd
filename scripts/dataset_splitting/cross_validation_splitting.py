@@ -9,7 +9,7 @@ def stratified_dataset_splitting(dataset_path, k_folds, seed=42):
     dataset = pd.read_csv(dataset_path)
 
     # -- retrieving only essential information
-    dataset = dataset[['subject_id', 'sample_id', 'task_id' , 'label', 'disvoice_prosody', 'wav2vec_layer07', 'disvoice_phonation', 'disvoice_articulation', 'disvoice_glottal']]
+    dataset = dataset[['subject_id', 'sample_id', 'task_id' , 'label', 'prosody', 'wav2vec', 'phonation', 'articulation', 'glottal']]
 
     sgkf_fulltrain_test = StratifiedGroupKFold(n_splits=k_folds, random_state=seed, shuffle=True)
     sgkf_train_validation = StratifiedGroupKFold(n_splits=k_folds, random_state=seed, shuffle=True)

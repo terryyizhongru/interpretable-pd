@@ -37,12 +37,20 @@ pip install -r requirements.txt
 To train and evaluate our proposed framework, we should follow a pipeline consisting of multiple steps, including data preprocessing, dataset split, feature extraction, as well as the ultimate training and evaluation. As an example, we provide the scripts aimed to address our GITA corpus experiments:
 
 ```
-bash scripts/run/dataset_preparation/gita.sh $DATASET_DIR $METADATA_PATH
-bash scripts/run/feature_extraction/gita.sh
-bash scripts/run/experiments/cross_full/gita.sh
+bash scripts/runs/dataset_preparation/gita.sh $DATASET_DIR $METADATA_PATH
+bash scripts/runs/feature_extraction/gita.sh
+bash scripts/runs/experiments/cross_full/gita.sh
 ```
 
-, where `$DATASET_DIR` and `$METADATA_PATH` refer to the directory containing all the audio waveform samples and the CSV including the corpus subject metadata, respectively.
+, where `$DATASET_DIR` and `$METADATA_PATH` refer to the directory containing all the audio waveform samples and the CSV including the corpus subject metadata (please, convert the 1st sheet of the .xlsx provided by the GITA dataset to a .csv), respectively.
+
+In order to evaluate your model in a specific assessment across all repetitions and folds, you can run the following command:
+
+```
+python scripts/evaluation/overall_performance.py --exps-dir ./exps/gita/cross_full/$TASK/
+```
+
+, where `$TASK` corresponds to the name of the target task you want to evaluate.
 
 ## <a name="citation"></a> 📖 Citation
 

@@ -17,10 +17,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # -- loading and processing metadata
+    # -- original column IDs: RECODING ORIGINAL NAME,UPDRS,UPDRS-speech,H/Y,SEX,AGE,time after diagnosis
     metadata = pd.read_csv(args.metadata_path)
-    metadata['label'] = metadata['subject_id'].map(lambda x: 1 if 'AVPEPUDEAC' not in x else 0)
+    metadata['label'] = metadata['RECODING ORIGINAL NAME'].map(lambda x: 1 if 'AVPEPUDEAC' not in x else 0)
     metadata['group_id'] = metadata['label'].map(lambda x: 'PD' if x else 'HC')
-    metadata['sex'] = metadata['sex'].map(lambda x: 1 if x == 'M' else 0)
+    metadata['sex'] = metadata['SEX'].map(lambda x: 1 if x == 'M' else 0)
 
     # -- processing audio samples
     dataset = []
@@ -32,10 +33,10 @@ if __name__ == "__main__":
         task_id = os.path.basename(wav_path).split('_')[1].upper()
 
         # -- retriveing metadata per sample
-        sample = metadata[metadata['subject_id'] == subject_id]
+        sample = metadata[metadata['RECODING ORIGINAL NAME'] == subject_id]
 
         sex = sample['sex'].values[0]
-        age = sample['age'].values[0]
+        age = sample['AGE'].values[0]
         label = sample['label'].values[0]
         group_id = sample['group_id'].values[0].upper()
         time_after_diagnosis = sample['time after diagnosis'].values[0]
@@ -51,11 +52,12 @@ if __name__ == "__main__":
     dataset_df = pd.DataFrame(dataset, columns=['subject_id', 'sample_id', 'task_id', 'label', 'group_id', 'sex', 'age', 'updrs_scale', 'updrs_speech', 'hy_scale', 'time_after_diagnosis'])
 
     # -- adding information about speech features paths
+    dataset_dir = os.path.sep.join(args.samples_dir.split(os.path.sep)[:-2])
     for feature_type in ['disvoice/articulation', 'disvoice/glottal', 'disvoice/phonation', 'disvoice/prosody', 'wav2vec/layer07']:
         feature_samples = []
 
         for i, sample in dataset_df.iterrows():
-            sample_path = os.path.join(args.samples_dir, 'speech_features', feature_type, f'{sample["sample_id"]}.npz')
+            sample_path = os.path.join(dataset_dir, 'speech_features', feature_type, f'{sample["sample_id"]}.npz')
             feature_samples.append(sample_path)
 
         dataset_df[feature_type.replace('/', '').replace('disvoice', '').replace('layer07', '')] = feature_samples

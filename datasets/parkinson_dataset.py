@@ -54,8 +54,7 @@ class ParkinsonDataset(torch.utils.data.Dataset):
         if self.config.model not in ['self_ssl']:
             batch_sample['informed_metadata'] = []
             for feature in self.config.features:
-                inf_feature_id = f'{feature["name"]}_{feature["toolkit"]}'
-                feature_data = np.load(sample[inf_feature_id])['data'][:, self.target_informed_idxs[feature_id]]
+                feature_data = np.load(sample[feature['name']])['data'][:, self.target_informed_idxs[feature['name']]]
 
                 feature_std = self.feature_norm_stats[feature['name']]['std']
                 feature_median = self.feature_norm_stats[feature['name']]['median']
@@ -63,11 +62,9 @@ class ParkinsonDataset(torch.utils.data.Dataset):
 
         # -- ssl speech features
         if self.config.model not in ['self_inf']:
-            ssl_feature_id = f'{self.config.ssl_features}_{self.config.ssl_features_conf["layer_id"]}'
-
-            ssl_data = np.load(sample[ssl_feature_id])['data']
-            ssl_median = self.feature_norm_stats[ssl_feature_id]['median']
-            ssl_std = self.feature_norm_stats[ssl_feature_id]['std']
+            ssl_data = np.load(sample[self.config.ssl_features])['data']
+            ssl_median = self.feature_norm_stats[self.config.ssl_features]['median']
+            ssl_std = self.feature_norm_stats[self.config.ssl_features]['std']
 
             batch_sample[self.config.ssl_features] = np.divide(ssl_data - ssl_median, ssl_std, out=np.zeros(ssl_data.shape), where=ssl_std!=0)
 
@@ -114,11 +111,10 @@ class ParkinsonDataset(torch.utils.data.Dataset):
         # -- statistics for informed speech features
         if self.config.model not in ['self_ssl']:
             for feature in self.config.features:
-                feature_id = f'{feature["name"]}_{feature["toolkit"]}'
 
                 samples = np.array([
-                    np.load(sample_path)['data'][:, self.target_informed_idxs[feature_id]]
-                    for sample_path in hc_dataset[feature_id].tolist()
+                    np.load(sample_path)['data'][:, self.target_informed_idxs[feature['name']]]
+                    for sample_path in hc_dataset[feature['name']].tolist()
                 ])
 
                 feature_norm_stats[feature['name']]['median'] = np.median(samples, axis=0)
@@ -126,11 +122,9 @@ class ParkinsonDataset(torch.utils.data.Dataset):
 
         # -- statistics for SSL speech features
         if self.config.model not in ['mlp_inf', 'self_inf']:
-            ssl_features_id = f'{self.config.ssl_features}_{self.config.ssl_features_conf["layer_id"]}'
-
             samples = np.concatenate([
                 np.load(sample_path)['data']
-                for sample_path in hc_dataset[ssl_features_id].tolist()
+                for sample_path in hc_dataset[self.config.ssl_features].tolist()
             ], axis=0 )
 
             feature_norm_stats[self.config.ssl_features]['median'] = np.median(samples, axis=0)

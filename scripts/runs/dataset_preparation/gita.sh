@@ -7,8 +7,8 @@ path_to_original_metadata=$2
 
 # -- preparing directory where to store the data
 k_folds=5
-dataset_dir=./data/gita/; mkdir -p $dataset_dir;
-splits_dir=./splits/gita/; mkdir -p $splits_dir;
+dataset_dir=./data/gita # ; mkdir -p $dataset_dir;
+splits_dir=./splits/gita # ; mkdir -p $splits_dir;
 
 # -- original audio samples restructuring
 python scripts/dataset_splitting/gita_restructure.py --data-dir $original_dataset_dir --metadata-path $path_to_original_metadata --new-data-dir $dataset_dir/audios/
@@ -20,6 +20,6 @@ python scripts/feature_extraction/wav_preprocessing.py --wav-dir $dataset_dir/au
 python scripts/dataset_splitting/gita_dataset.py --samples-dir $dataset_dir/norm_audios/ --metadata-path $path_to_original_metadata --output-dir $splits_dir
 
 # -- stratified cross-validation splits
-python scrips/dataset_splitting/cross_validation_splitting.py --dataset-path $splits_dir/dataset.csv --k-folds $k_folds
+python scripts/dataset_splitting/cross_validation_splitting.py --dataset-path $splits_dir/dataset.csv --k-folds $k_folds
 
 

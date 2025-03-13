@@ -97,7 +97,7 @@ def pipeline(args, config, return_dicts=False):
     same_config = task_and_feature_filtering(config, args.filter_tasks, args.exclude_features)
 
     diff_eval = False
-    if 'None' not in args.filter_evaluation_tasks:
+    if 'none' not in args.filter_evaluation_tasks:
         diff_eval = True
         evaluation_config = task_and_feature_filtering(config, args.filter_evaluation_tasks, args.exclude_features)
 
@@ -177,8 +177,8 @@ if __name__ == "__main__":
     parser.add_argument('--mode', default='both', type=str, help='Choose between: "training", "evaluation", or "both"')
 
     parser.add_argument("--exclude-features", nargs='+', default=['none'], help="Choose the features you don't want to use for ablation studies.")
-    parser.add_argument('--filter-tasks', nargs='+', default=['ALL'], type=str, help='Choose between: "ALL", "DDK", "SUSTAINED-VOWEL", "LISTEN-AND-WAIT" or "MONOLOGUE"')
-    parser.add_argument('--filter-evaluation-tasks', nargs='+', default=['None'], type=str, help='Choose between: "ALL", "DDK", "SUSTAINED-VOWEL", "LISTEN-AND-WAIT" or "MONOLOGUE"')
+    parser.add_argument('--filter-tasks', nargs='+', default=['ALL'], type=str, help='Choose the task to train')
+    parser.add_argument('--filter-evaluation-tasks', nargs='+', default=['none'], type=str, help='Choose the task to evaluate on, otherwise we evaluate on the --filter-tasks')
 
     parser.add_argument("--yaml-overrides", metavar="CONF:[KEY]:VALUE", nargs='*', help="Set a number of conf-key-value pairs for modifying the yaml config file on the fly.")
 

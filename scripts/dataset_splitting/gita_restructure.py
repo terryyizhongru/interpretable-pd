@@ -19,10 +19,10 @@ if __name__ == "__main__":
     os.makedirs(args.new_data_dir, exist_ok=True)
 
     # -- loading and processing metadata
+    # -- original column IDs: RECODING ORIGINAL NAME,UPDRS,UPDRS-speech,H/Y,SEX,AGE,time after diagnosis
     metadata = pd.read_csv(args.metadata_path)
-    metadata['label'] = metadata['subject_id'].map(lambda x: 1 if 'AVPEPUDEAC' not in x else 0)
+    metadata['label'] = metadata['RECODING ORIGINAL NAME'].map(lambda x: 1 if 'AVPEPUDEAC' not in x else 0)
     metadata['group_id'] = metadata['label'].map(lambda x: 'PD' if x else 'HC')
-    metadata['sex'] = metadata['sex'].map(lambda x: 1 if x == 'M' else 0)
 
     # -- processing audio samples
     ignored_samples = 0
@@ -34,14 +34,16 @@ if __name__ == "__main__":
 
         sample_id = wav_path.split(os.path.sep)[-1].split('.')[0]
         subject_id = re.findall(r"(AVPEPUDEA(?:C)?\d{4})", sample_id)[0]
-        sample_id = f'{subject_id}_{sample_id.split(subject_id)[-1]}'.replace('__', '_').replace('-MONOLOGO-NR', 'NR').replace('_PRECUPADO', '_PREOCUPADO').replace(' .wav', '.wav').upper()
-        task_id = wav_path.split(args.data_dir)[-1].split(os.path.sep)[0].upper()
+        if subject_id in metadata['RECODING ORIGINAL NAME'].tolist():
+            sample_id = f'{subject_id}_{sample_id.split(subject_id)[-1]}'.replace('_PRECUPADO', '_PREOCUPADO').replace('__', '_').upper()
+            task_id = wav_path.split(args.data_dir)[-1].split(os.path.sep)[0].upper()
+            task_id = task_id.replace('MODULATED VOWELS', 'MODULATED-VOWELS').replace('SENTENCES2', 'SENTENCES').replace('DDK ANALYSIS', 'DDK').replace('READ TEXT', 'READ-TEXT')
 
-        # -- retriveing metadata per sample
-        sample = metadata[metadata['subject_id'] == subject_id]
-        group_id = sample['group_id'].values[0].upper()
+            # -- retriveing metadata per sample
+            sample = metadata[metadata['RECODING ORIGINAL NAME'] == subject_id]
+            group_id = sample['group_id'].values[0].upper()
 
-        new_wav_path = os.path.join(args.new_data_dir, f'{group_id}_{task_id}_{sample_id}.wav')
-        shutil.copy(wav_path, new_wav_path)
+            new_wav_path = os.path.join(args.new_data_dir, f'{group_id}_{task_id}_{sample_id}.wav').replace('_VOWELS_', '_SUSTAINED-VOWELS_').replace('_PRECUPADO', '_PREOCUPADO').replace('__', '_')
+            shutil.copy(wav_path, new_wav_path)
 
     print(f'{ignored_samples} samples were ignored because of some of the subjects were not further considered in the study.')
