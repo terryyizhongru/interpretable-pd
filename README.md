@@ -42,7 +42,7 @@ bash scripts/runs/feature_extraction/gita.sh
 bash scripts/runs/experiments/cross_full/gita.sh
 ```
 
-, where `$DATASET_DIR` and `$METADATA_PATH` refer to the directory containing all the audio waveform samples and the CSV including the corpus subject metadata (please, convert the 1st sheet of the .xlsx provided by the GITA dataset to a .csv), respectively.
+, where `$DATASET_DIR` and `$METADATA_PATH` refer to the directory containing all the audio waveform samples and the CSV including the corpus subject metadata, respectively. _Please, note that you have to convert the 1st sheet of the .xlsx provided in the GITA dataset to a .csv file.)_
 
 In order to evaluate your model in a specific assessment across all repetitions and folds, you can run the following command:
 
