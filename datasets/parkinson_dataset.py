@@ -16,13 +16,19 @@ class ParkinsonDataset(torch.utils.data.Dataset):
         # -- collecting informed speech feature metadata
         informed_metadata_ids = []
         informed_metadata_bounds = {}
+
         self.target_informed_idxs = {}
+        self.target_informed_categories = {}
         for feature in self.config.features:
             feature_metadata_df = pd.read_csv(feature['metadata'])
 
             feature_metadata_ids = feature_metadata_df['feature_id'].tolist()
             self.target_informed_idxs[feature['name']] = feature_metadata_df['index_pos'].tolist()
-
+            if 'category_id' in feature_metadata_df.columns:
+                self.target_informed_categories[feature['name']] = feature_metadata_df['category_id'].tolist()
+                if len(self.target_informed_categories[feature['name']]) != len(self.target_informed_idxs[feature['name']]):
+                    raise ValueError(f"Feature {feature['name']} has different number of categories and indices.")
+            
             start_bound = len(informed_metadata_ids)
             end_bound = start_bound + len(feature_metadata_ids)
 
@@ -54,7 +60,19 @@ class ParkinsonDataset(torch.utils.data.Dataset):
         if self.config.model not in ['self_ssl']:
             batch_sample['informed_metadata'] = []
             for feature in self.config.features:
-                feature_data = np.load(sample[feature['name']])['data'][:, self.target_informed_idxs[feature['name']]]
+
+                if self.target_informed_categories != {}:                    
+
+                    feature_data = []
+                    for i, category_id in enumerate(self.target_informed_categories[feature['name']]):
+                        # -- load the sample
+                        feature_value = np.load(sample[category_id])['data'][:, self.target_informed_idxs[feature['name']][i]]
+                        feature_value = feature_value.flatten()[0]
+                        feature_data.append(feature_value)
+                        
+                    feature_data = np.expand_dims(np.array(feature_data), axis=0)
+                else:
+                    feature_data = np.load(sample[feature['name']])['data'][:, self.target_informed_idxs[feature['name']]]
 
                 feature_std = self.feature_norm_stats[feature['name']]['std']
                 feature_median = self.feature_norm_stats[feature['name']]['median']
@@ -111,11 +129,28 @@ class ParkinsonDataset(torch.utils.data.Dataset):
         # -- statistics for informed speech features
         if self.config.model not in ['self_ssl']:
             for feature in self.config.features:
+                if self.target_informed_categories != {}:                    
+    
+                    samples = []
+                    for i, category_id in enumerate(self.target_informed_categories[feature['name']]):
+                        # -- load the sample
+                        samples1 = []
+                        for sample_path in hc_dataset[category_id].tolist():
+                            feature_value = np.load(sample_path)['data'][:, self.target_informed_idxs[feature['name']][i]]
+                            # 确保是标量或一维数组，然后添加到特征列表
+                            feature_value = feature_value.flatten()[0]
+                            samples1.append(feature_value)
+                        samples.append(np.array(samples1))
+                        # -- concatenate the samples
 
-                samples = np.array([
-                    np.load(sample_path)['data'][:, self.target_informed_idxs[feature['name']]]
-                    for sample_path in hc_dataset[feature['name']].tolist()
-                ])
+                    samples = np.stack(samples, axis=1)
+                    samples = np.expand_dims(samples, axis=1)
+                    
+                else:
+                    samples = np.array([
+                        np.load(sample_path)['data'][:, self.target_informed_idxs[feature['name']]]
+                        for sample_path in hc_dataset[feature['name']].tolist()
+                        ])
 
                 feature_norm_stats[feature['name']]['median'] = np.median(samples, axis=0)
                 feature_norm_stats[feature['name']]['std'] = np.std(samples, axis=0)

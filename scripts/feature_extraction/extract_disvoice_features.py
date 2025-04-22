@@ -6,8 +6,23 @@ import joblib
 import librosa
 import argparse
 import numpy as np
+if not hasattr(np, 'int'):
+    np.int = int
 from tqdm import tqdm
 from distutils.util import strtobool
+import warnings
+warnings.filterwarnings("ignore")
+
+# Monkey patch for the sys.warn error in DisVoice
+def monkey_patch_disvoice():
+    """Apply monkey patches to fix issues in DisVoice library"""
+    # Add sys.warn as an alias for warnings.warn to fix the GCI module
+    if not hasattr(sys, 'warn'):
+        sys.warn = warnings.warn
+        print("Applied monkey patch: sys.warn -> warnings.warn")
+
+# Apply patches before importing DisVoice
+monkey_patch_disvoice()
 
 sys.path.insert(1, os.path.abspath('tools/DisVoice/'))
 from disvoice.glottal import Glottal
@@ -15,8 +30,6 @@ from disvoice.prosody import Prosody
 from disvoice.phonation import Phonation
 from disvoice.articulation import Articulation
 
-import warnings
-warnings.filterwarnings("ignore")
 
 def extract_prosody():
     prosody = Prosody()
@@ -29,8 +42,8 @@ def extract_prosody():
     for wav_file in tqdm(wav_files):
         output_path = os.path.join(output_dir, os.path.basename(wav_file)).replace('.wav', '.npz')
         prosody_features = prosody.extract_features_file(wav_file, static=True, plots=False, fmt='npy')
-        prosody_features = np.expand_dims(prosody_features, 0) if args.static else prosody_features
-
+        prosody_features = np.expand_dims(prosody_features, 0) if args.static_features else prosody_features
+        print(f'Prosody: {prosody_features.shape}')
         # -- data curation
         prosody_features[np.isnan(prosody_features)] = 0
         # print(f'Prosody: {prosody_features.shape}')
@@ -94,6 +107,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='DisVoice-based Feature Extraction', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--wav-dir', type=str, default='./data/gita/norm_audios/')
     parser.add_argument('--output-dir', required=True, type=str)
+    parser.add_argument('--static-features', action='store_true', default=True, help='Whether to use static features')
     args = parser.parse_args()
 
     # -- speech feature extraction
