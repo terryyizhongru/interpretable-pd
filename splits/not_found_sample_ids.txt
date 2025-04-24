@@ -1,0 +1,5 @@
+PD_SENTENCES_AVPEPUDEA0006_PRECUPADO,//data/storage1t/PC-GITA/PC-GITA//sentences2/4_preocupado/non-normalized/pd/AVPEPUDEA0006_precupado.wav
+PD_SENTENCES_AVPEPUDEA0020_PRECUPADO,//data/storage1t/PC-GITA/PC-GITA//sentences2/4_preocupado/non-normalized/pd/AVPEPUDEA0020_precupado.wav
+PD_SENTENCES_AVPEPUDEA0021_PRECUPADO,//data/storage1t/PC-GITA/PC-GITA//sentences2/4_preocupado/non-normalized/pd/AVPEPUDEA0021_precupado.wav
+PD_SENTENCES_AVPEPUDEA0024_PRECUPADO,//data/storage1t/PC-GITA/PC-GITA//sentences2/4_preocupado/non-normalized/pd/AVPEPUDEA0024_precupado.wav
+HC_SENTENCES_AVPEPUDEAC0018_PRECUPADO,//data/storage1t/PC-GITA/PC-GITA//sentences2/4_preocupado/non-normalized/hc/AVPEPUDEAC0018_precupado.wav

@@ -3,7 +3,7 @@
 set -e
 
 dataset=gita
-for task in SUSTAINED-VOWELS WORDS DDK SENTENCES READ-TEXT MONOLOGUE; do
+for task in SUSTAINED-VOWELS WORDS DDK SENTENCES MONOLOGUE READ-TEXT; do
 for seed in 12 21 33 42 52; do
 for f in 0 1 2 3 4; do
 

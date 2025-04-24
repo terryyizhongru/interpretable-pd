@@ -68,7 +68,7 @@ training_settings:
   scheduler: 'onecycle'
   anneal_strategy: 'cos'
   loss_criterion: 'cross_entropy'
-  epochs: 10
+  epochs: 5
   batch_size: 8
   accum_grad: 1
   learning_rate: 0.0004

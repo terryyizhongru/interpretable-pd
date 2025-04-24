@@ -94,6 +94,8 @@ def pipeline(args, config, return_dicts=False):
     torch.cuda.manual_seed_all(config.seed)
 
     # -- task and feature filtering
+    print(config)
+    print(f'Using the following features: {config.features}')
     same_config = task_and_feature_filtering(config, args.filter_tasks, args.exclude_features)
 
     diff_eval = False

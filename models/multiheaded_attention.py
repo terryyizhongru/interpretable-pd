@@ -37,8 +37,13 @@ class MultiHeadedAttention(torch.nn.Module):
             self.linear_k = None
         else:
             self.linear_k = torch.nn.Linear(key_dim, key_dim)
+        
 
-        self.linear_v = torch.nn.Linear(value_dim, value_dim)
+        if 'new' in self.attn_type:
+            self.linear_v = None
+        else:
+            self.linear_v = torch.nn.Linear(value_dim, value_dim)
+            
         self.linear_out = torch.nn.Linear(key_dim, key_dim)
         self.attn_scores = None
         self.dropout = torch.nn.Dropout(p=dropout_rate)
@@ -59,11 +64,20 @@ class MultiHeadedAttention(torch.nn.Module):
         """
         n_batch = query.size(0)
 
-        q = self.linear_q(query).view(n_batch, -1, self.h, self.d_query)
+        if self.linear_q is not None:
+            q = self.linear_q(query).view(n_batch, -1, self.h, self.d_query)
+        else:
+            q = query.view(n_batch, -1, self.h, self.d_query)
+    
         if self.linear_k is not None:
             k = self.linear_k(key).view(n_batch, -1, self.h, self.d_key)
-        k = key.view(n_batch, -1, self.h, self.d_key)
-        v = self.linear_v(value).view(n_batch, -1, self.h, self.d_value)
+        else:
+            k = key.view(n_batch, -1, self.h, self.d_key)
+        
+        if self.linear_v is not None:
+            v = self.linear_v(value).view(n_batch, -1, self.h, self.d_value)
+        else:
+            v = value.view(n_batch, -1, self.h, self.d_value)
 
         q = q.transpose(1, 2)  # (batch, head, time1, d_query)
         k = k.transpose(1, 2)  # (batch, head, time2, d_key)
@@ -84,11 +98,12 @@ class MultiHeadedAttention(torch.nn.Module):
                 weighted by the attention score (#batch, time1, time2).
 
         """
+
         n_batch = value.size(0)
         if mask is not None:
             mask = mask.unsqueeze(1).eq(0)
             min_value = torch.finfo(scores.dtype).min
-            if self.attn_type in ['cross_time']:
+            if self.attn_type in ['cross_time', 'new']:
                 mask = mask.permute(0,1,3,2)
             scores = scores.masked_fill(mask, min_value)
             self.attn_scores = torch.softmax(scores, dim=-1).masked_fill(
@@ -127,7 +142,6 @@ class MultiHeadedAttention(torch.nn.Module):
 
         """
         q, k, v = self.forward_qkv(query, key, value)
-
         # -- pre-score dimension adjustments
         if self.attn_type == 'cross_embed':
             q = q.transpose(-2, -1)

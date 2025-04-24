@@ -37,7 +37,11 @@ def task_and_feature_filtering(old_config, filter_tasks, exclude_features, verbo
         config.tasks = filtered_tasks
         consequent_features = list(set(consequent_features))
     else:
-        consequent_features = ['articulation', 'glottal', 'phonation', 'prosody']
+        consequent_features = []
+        for task in config.tasks:
+            if task['name'] == 'SENTENCES':
+                consequent_features += task['features']
+            consequent_features += task['features']
 
     filtered_features = []
     for feature in config.features:
