@@ -180,3 +180,10 @@ metadata/target_tokens/VoiceQuality.txt
 data
 disvoice
 exps
+logs/log_10fold_crossfull_newcate
+logs/log_10fold_crossfull_oldcate
+logs/log_10fold_crosstoken_newcate
+logs/log_10fold_crosstoken_oldcate
+logs/log_crosstoken_pertask_newcate
+logs/log_crosstoken_pertask_oldcate
+logs/log_repro_newcate

@@ -4,12 +4,12 @@ from .multiheaded_attention import MultiHeadedAttention
 import torch.nn as nn
 
 
-class CrossFullModel(torch.nn.Module):
+class CrossTokenModel(torch.nn.Module):
     """SSL Embedding & Temporal Cross-Attention Model.
     """
 
     def __init__(self, config):
-        super(CrossFullModel, self).__init__()
+        super(CrossTokenModel, self).__init__()
 
         self.config = config
         self.attn_type = self.config.model
@@ -106,7 +106,6 @@ class CrossFullModel(torch.nn.Module):
         
         Q = batch[self.config.ssl_features]  # (B, T, D)
         # cross attention: Q x (K,D) tokens
-        # compute scores and output manually
         out = self.cross_attn(Q, tokens, tokens, mask=batch['mask_ssl'])  # (B, T, D)
         # aggregate over time
         repr = Reduce('b n d -> b d', 'mean')(out)                               # (B, D)                                   # (B, D)

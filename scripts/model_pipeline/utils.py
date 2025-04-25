@@ -19,6 +19,8 @@ def build_model(config):
         model = SelfSSLModel(config)
     elif config.model == 'cross_full':
         model = CrossFullModel(config)
+    elif config.model == 'cross_token':
+        model = CrossTokenModel(config)
     else:
         raise ValueError(f'unknown {config.model} model architecture')
 

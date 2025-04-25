@@ -230,6 +230,7 @@ if __name__ == '__main__':
         print(f"  Mean Precision (PD): {stats['precision']['mean']:.4f} ± {stats['precision']['std']:.4f}")
         print(f"  Mean Recall (PD): {stats['recall']['mean']:.4f} ± {stats['recall']['std']:.4f}")
     
+    # 打印每个run每个fold的结果
     print("\nTest Performance Per Fold:")
     for run_dir, fold_results in test_fold_reports.items():
         print(f"\nRun: {run_dir}")
@@ -244,7 +245,33 @@ if __name__ == '__main__':
         print(f"  Mean F1 (PD): {stats['f1']['mean']:.4f} ± {stats['f1']['std']:.4f}")
         print(f"  Mean Precision (PD): {stats['precision']['mean']:.4f} ± {stats['precision']['std']:.4f}")
         print(f"  Mean Recall (PD): {stats['recall']['mean']:.4f} ± {stats['recall']['std']:.4f}")
-    
+
+    # 计算所有runs的平均性能指标和标准差
+    print("\n=== Average Performance Across All Test Runs ===")
+    all_run_accuracies = [stats['accuracy']['mean'] for stats in test_fold_stats.values()]
+    all_run_f1s = [stats['f1']['mean'] for stats in test_fold_stats.values()]
+    all_run_precisions = [stats['precision']['mean'] for stats in test_fold_stats.values()]
+    all_run_recalls = [stats['recall']['mean'] for stats in test_fold_stats.values()]
+
+    # 计算所有runs的标准差的平均值
+    all_run_accuracies_stds = [stats['accuracy']['std'] for stats in test_fold_stats.values()]
+    all_run_f1s_stds = [stats['f1']['std'] for stats in test_fold_stats.values()]
+    all_run_precisions_stds = [stats['precision']['std'] for stats in test_fold_stats.values()]
+    all_run_recalls_stds = [stats['recall']['std'] for stats in test_fold_stats.values()]
+
+    # 打印所有runs的平均性能
+    print(f"Mean Accuracy across runs: {np.mean(all_run_accuracies):.4f} ± {np.std(all_run_accuracies):.4f}")
+    print(f"Mean F1 (PD) across runs: {np.mean(all_run_f1s):.4f} ± {np.std(all_run_f1s):.4f}")
+    print(f"Mean Precision (PD) across runs: {np.mean(all_run_precisions):.4f} ± {np.std(all_run_precisions):.4f}")
+    print(f"Mean Recall (PD) across runs: {np.mean(all_run_recalls):.4f} ± {np.std(all_run_recalls):.4f}")
+
+    # 打印所有runs的标准差的平均值
+    print("\n=== Average of Standard Deviations Across Runs ===")
+    print(f"Mean of Accuracy STDs: {np.mean(all_run_accuracies_stds):.4f}")
+    print(f"Mean of F1 (PD) STDs: {np.mean(all_run_f1s_stds):.4f}")
+    print(f"Mean of Precision (PD) STDs: {np.mean(all_run_precisions_stds):.4f}")
+    print(f"Mean of Recall (PD) STDs: {np.mean(all_run_recalls_stds):.4f}")
+
     # 也可以继续使用原来的函数获取汇总报告
     val_reports, test_reports = get_reports(args.exps_dir)
     val_overall_report = compute_average_report_across_runs(val_reports)
