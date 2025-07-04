@@ -21,6 +21,10 @@ def build_model(config):
         model = CrossFullModel(config)
     elif config.model == 'cross_token':
         model = CrossTokenModel(config)
+    elif config.model == 'cross_full_fix':
+        model = CrossFullModelFix(config)
+    elif config.model == 'cross_full_fix_value':
+        model = CrossFullModelFixValue(config)
     else:
         raise ValueError(f'unknown {config.model} model architecture')
 
