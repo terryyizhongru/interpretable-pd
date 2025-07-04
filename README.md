@@ -1,8 +1,8 @@
-<h1 align="center"><span style="font-weight:normal">Unveiling Interpretability in Self-Supervised Speech Representations for Parkinson’s Diagnosis 🗣️🎙️📝📊</h1>
+<h1 align="center"><span style="font-weight:normal">RECA-PD: A Robust Explainable Cross-Attention Method for Speech-based Parkinson's Disease Classification</h1>
   
 <div align="center">
   
-[D. Gimeno-Gómez](https://scholar.google.es/citations?user=DVRSla8AAAAJ&hl=en), [C. Botelho](https://scholar.google.com/citations?user=d-xmVlUAAAAJ&hl=en), [A. Pompili](https://scholar.google.pt/citations?user=ZiB_o6kAAAAJ&hl=en), [A. Abad](https://scholar.google.pt/citations?user=M5hzAIwAAAAJ&hl=en), [C.-D. Martínez-Hinarejos](https://scholar.google.es/citations?user=HFKXPH8AAAAJ&hl=en)
+[Terry Yi Zhong](https://terryyizhong.github.io/)
 </div>
 
 <div align="center">
@@ -16,11 +16,9 @@
 
 ## <a name="intro"></a> 📘 Introduction
 
-<div align="center"> <img src="docs/figure1.png"  width="720"> </div>
+<div align="center"> <img src="docs/TSD-V1.2.drawio.png"  width="720"> </div>
 
-**Abstract.** _Recent works in pathological speech analysis have increasingly relied on powerful self-supervised speech representations, leading to promising results. However, the complex, black-box nature of these embeddings and the limited research on their interpretability significantly restrict their adoption for clinical diagnosis. To address this gap, we propose a novel, interpretable framework specifically designed to support Parkinson’s Disease (PD) diagnosis. Through the design of simple yet effective cross-attention mechanisms for both embedding- and temporal-level
-analysis, the proposed framework offers interpretability from two distinct but complementary perspectives. Experimental findings across five well-established speech benchmarks for PD detection demonstrate the framework’s capability to identify meaningful speech patterns within self-supervised representations for a wide range of assessment tasks. Fine-grained temporal analyses further underscore its potential to enhance the interpretability
-of deep-learning pathological speech models, paving the way for the development of more transparent, trustworthy, and clinically applicable computer-assisted diagnosis systems in this domain. Moreover, in terms of classification accuracy, our method achieves results competitive with state-of-the-art approaches, while also demonstrating robustness in cross-lingual scenarios when applied to spontaneous speech production._ [📜 Arxiv Link](https://arxiv.org/abs/2412.02006) [📜 IEEE Link](https://ieeexplore.ieee.org/abstract/document/10877763)
+**Abstract.** _Parkinson's Disease (PD) affects over 10 million people globally, with speech impairments often preceding motor symptoms by years, making speech a valuable modality for early, non-invasive detection. While recent deep-learning models achieve high accuracy, they typically lack the explainability required for clinical use. To address this, we propose RECA-PD, a novel, robust, and explainable cross-attention architecture that combines interpretable speech features with self-supervised representations. RECA-PD matches state-of-the-art performance in Parkinson’s disease detection while providing explanations that are more consistent and more clinically meaningful. Additionally, we demonstrate that performance degradation in certain speech tasks (e.g., monologue) can be mitigated by segmenting long recordings. Our findings indicate that performance and explainability are not necessarily mutually exclusive. Future work will enhance the usability of explanations for non-experts and explore severity estimation to increase the real-world clinical relevance._ [📜 Arxiv Link](https://arxiv.org/abs/) [📜 TSD 2025 Link]()
 
 ## <a name="preparation"></a> 🛠️ Preparation
 
@@ -54,20 +52,5 @@ python scripts/evaluation/overall_performance.py --exps-dir ./exps/gita/cross_fu
 
 ## <a name="citation"></a> 📖 Citation
 
-The paper is currently under review for the Special Issue on Modelling and Processing Language and Speech in Neurodegenerative Disorders published by Journal of Selected Topics in Signal Processing (JSTSP). For the moment, if you found useful our work, please cite our preprint paper as follows:
 
-```
-@article{gimeno2025unveiling,
-  author={Gimeno-G{\'o}mez, David and Botelho, Catarina and Pompili, Anna and Abad, Alberto and Martínez-Hinarejos, Carlos-D.},
-  title={{Unveiling Interpretability in Self-Supervised Speech Representations for Parkinson’s Diagnosis}},
-  journal={IEEE Journal of Selected Topics in Signal Processing},
-  volume={},
-  pages={1--14}
-  year={2025},
-  doi={10.1109/JSTSP.2025.3539845},
-}
-```
 
-## <a name="license"></a> 📝 License
-
-This work is protected by [MIT License](LICENSE)
