@@ -1,0 +1,24 @@
+average Evoiced
+std Evoiced
+skewness Evoiced
+kurtosis Evoiced
+average Evoiced Tilt
+std Evoiced Tilt
+skewness Evoiced Tilt
+kurtosis Evoiced Tilt
+average Evoiced MSE
+std Evoiced MSE
+skewness Evoiced MSE
+kurtosis Evoiced MSE
+average Eunvoiced
+std Eunvoiced
+skewness Eunvoiced
+kurtosis Eunvoiced
+average Eunvoiced Tilt
+std Eunvoiced Tilt
+skewness Eunvoiced Tilt
+kurtosis Eunvoiced Tilt
+average Eunvoiced MSE
+std Eunvoiced MSE
+skewness Eunvoiced MSE
+kurtosis Eunvoiced MSE

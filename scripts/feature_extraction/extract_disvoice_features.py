@@ -93,13 +93,17 @@ def extract_glottal():
 
     for wav_file in tqdm(wav_files):
         output_path = os.path.join(output_dir, os.path.basename(wav_file)).replace('.wav', '.npz')
+        try:
+            glottal_features = glottal.extract_features_file(wav_file, static=True, plots=False, fmt='npy')
 
-        glottal_features = glottal.extract_features_file(wav_file, static=True, plots=False, fmt='npy')
-
-        # -- data curation
-        glottal_features[np.isnan(glottal_features)] = 0
-        # print(f'Glottal: {glottal_features.shape}')
-        np.savez_compressed(output_path, data=glottal_features)
+            # -- data curation
+            glottal_features[np.isnan(glottal_features)] = 0
+            # print(f'Glottal: {glottal_features.shape}')
+            np.savez_compressed(output_path, data=glottal_features)
+        except:
+            with open('failed_files.txt', 'a') as f:
+                f.write(f'{wav_file}\n')
+            print(f'Failed to extract glottal features for {wav_file}')
 
 if __name__ == "__main__":
 

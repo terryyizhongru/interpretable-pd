@@ -9,7 +9,7 @@
   
 [📘 Introduction](#intro) |
 [🛠️ Data Preparation](#preparation) |
-[🚀 Training and Evaluation](#training) |
+[🚀 Training and Evaluation](#training_and_evaluation) |
 [📖 Citation](#citation) |
 [📝 License](#license)
 </div>
@@ -18,7 +18,7 @@
 
 <div align="center"> <img src="docs/TSD-V1.2.drawio.png"  width="720"> </div>
 
-**Abstract.** _Parkinson's Disease (PD) affects over 10 million people globally, with speech impairments often preceding motor symptoms by years, making speech a valuable modality for early, non-invasive detection. While recent deep-learning models achieve high accuracy, they typically lack the explainability required for clinical use. To address this, we propose RECA-PD, a novel, robust, and explainable cross-attention architecture that combines interpretable speech features with self-supervised representations. RECA-PD matches state-of-the-art performance in Parkinson’s disease detection while providing explanations that are more consistent and more clinically meaningful. Additionally, we demonstrate that performance degradation in certain speech tasks (e.g., monologue) can be mitigated by segmenting long recordings. Our findings indicate that performance and explainability are not necessarily mutually exclusive. Future work will enhance the usability of explanations for non-experts and explore severity estimation to increase the real-world clinical relevance._ [📜 Arxiv Link](https://arxiv.org/abs/) [📜 TSD 2025 Link]()
+**Abstract.** _Parkinson's Disease (PD) affects over 10 million people globally, with speech impairments often preceding motor symptoms by years, making speech a valuable modality for early, non-invasive detection. While recent deep-learning models achieve high accuracy, they typically lack the explainability required for clinical use. To address this, we propose RECA-PD, a novel, robust, and explainable cross-attention architecture that combines interpretable speech features with self-supervised representations. RECA-PD matches state-of-the-art performance in Parkinson’s disease detection while providing explanations that are more consistent and more clinically meaningful. Additionally, we demonstrate that performance degradation in certain speech tasks (e.g., monologue) can be mitigated by segmenting long recordings. Our findings indicate that performance and explainability are not necessarily mutually exclusive. Future work will enhance the usability of explanations for non-experts and explore severity estimation to increase the real-world clinical relevance._ [📜 Arxiv](https://arxiv.org/abs/) [📜 TSD 2025]()
 
 ## <a name="environment"></a> 🛠️ Environment
 
@@ -47,7 +47,7 @@ We also include the scripts used to generate the split-mono training set describ
 
 Note that, to keep the overall pipeline straightforward, the split-mono task is not integrated into the scripts of Evaluation Protocol 1 introduced below.
 
-## <a name="training and evaluation"></a> 🚀 Training and Evaluation
+## <a name="training_and_evaluation"></a> 🚀 Training and Evaluation
 
 
 We evaluate four methods (M1–M4) under two protocols as introduced in the paper.  
@@ -89,9 +89,14 @@ bash scripts/runs/experiments/eval/print_res_table2.sh exps/gita_splits2/M4/comb
 ```
 
 
+### Analysis and Visualization
 
-A simple Visualization notebook:
+Wilcoxon signed-rank test example:
 
+- `scripts/evaluation/WS-rank.ipynb`
+
+A simple Visualization example:
+- ``
 
 
 ## <a name="citation"></a> 📖 Citation

@@ -1,0 +1,18 @@
+average F0
+std F0
+max F0
+min F0
+skewness F0
+kurtosis F0
+average F0 Tilt
+average F0 MSE
+std F0 Tilt
+std F0 MSE
+max F0 Tilt
+max F0 MSE
+min F0 Tilt
+min F0 MSE
+skewness F0 Tilt
+skewness F0 MSE
+kurtosis F0 Tilt
+kurtosis F0 MSE

@@ -1,0 +1,34 @@
+average Jitter
+average Shimmer
+average APQ
+average PPQ
+std Jitter
+std Shimmer
+std APQ
+std PPQ
+skewness Jitter
+skewness Shimmer
+skewness APQ
+skewness PPQ
+kurtosis Jitter
+kurtosis Shimmer
+kurtosis APQ
+kurtosis PPQ
+global average var GCI
+global average avg NAQ
+global average std NAQ
+global average avg QOQ
+global average std QOQ
+global average avg H1H2
+global average std H1H2
+global average avg HRF
+global average std HRF
+global std var GCI
+global std avg NAQ
+global std std NAQ
+global std avg QOQ
+global std std QOQ
+global std avg H1H2
+global std std H1H2
+global std avg HRF
+global std std HRF
