@@ -57,9 +57,8 @@ Generated splits for both protocols are available under:
 - `splits/gita_splits1/`
 - `splits/gita_splits2/`
 
----
 
-## Training
+### Training
 
 All training scripts are located in:  
 - `scripts/runs/experiments/training/protocol1/`  
@@ -75,15 +74,20 @@ To train each method, run the corresponding shell script:
 | **M4 (RECA-PD, proposed)**     | `gita_RECAPD_M4.sh`                  |
 
 
-Evaluation:
-
-In order to **evaluate your model** for a specific assessment task across all repetitions and folds, you can run the following command:
-
+Example:
 ```
-python scripts/evaluation/overall_performance.py --exps-dir ./exps/gita/cross_full/$TASK/
+bash scripts/runs/experiments/training/protocol2/gita_RECAPD_M4.sh
 ```
 
-, where `$TASK` corresponds to the name of the target task you want to evaluate. You can always inspect the directory `scripts/evaluation/` to find other interesting scripts.
+### Evaluation
+
+In order to **evaluate** follow two protocols , you can run the following commands:
+
+```
+bash scripts/runs/experiments/eval/print_res_table1.sh exps/gita_splits1/M4/
+bash scripts/runs/experiments/eval/print_res_table2.sh exps/gita_splits2/M4/combined_set/
+```
+
 
 
 A simple Visualization notebook:
