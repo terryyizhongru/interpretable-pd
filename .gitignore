@@ -165,25 +165,7 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
-log_alltask
-log_alltask_10fold
-log_alltask_Mono
-log_glotal
-log_repro
-log10epoch
-configs/framework-bak.yaml
-metadata/target_tokens/Articulation.txt
-metadata/target_tokens/MonoLoudness.txt
-metadata/target_tokens/MonoPitch.txt
-metadata/target_tokens/Rhythm.txt
-metadata/target_tokens/VoiceQuality.txt
 data
 disvoice
 exps
-logs/log_10fold_crossfull_newcate
-logs/log_10fold_crossfull_oldcate
-logs/log_10fold_crosstoken_newcate
-logs/log_10fold_crosstoken_oldcate
-logs/log_crosstoken_pertask_newcate
-logs/log_crosstoken_pertask_oldcate
-logs/log_repro_newcate
+logs/

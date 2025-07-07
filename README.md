@@ -8,10 +8,10 @@
 <div align="center">
   
 [📘 Introduction](#intro) |
-[🛠️ Data Preparation](#preparation) |
+[🛠️ Preparation](#preparation) |
 [🚀 Training and Evaluation](#training_and_evaluation) |
 [📖 Citation](#citation) |
-[📝 License](#license)
+
 </div>
 
 ## <a name="intro"></a> 📘 Introduction
@@ -20,17 +20,23 @@
 
 **Abstract.** _Parkinson's Disease (PD) affects over 10 million people globally, with speech impairments often preceding motor symptoms by years, making speech a valuable modality for early, non-invasive detection. While recent deep-learning models achieve high accuracy, they typically lack the explainability required for clinical use. To address this, we propose RECA-PD, a novel, robust, and explainable cross-attention architecture that combines interpretable speech features with self-supervised representations. RECA-PD matches state-of-the-art performance in Parkinson’s disease detection while providing explanations that are more consistent and more clinically meaningful. Additionally, we demonstrate that performance degradation in certain speech tasks (e.g., monologue) can be mitigated by segmenting long recordings. Our findings indicate that performance and explainability are not necessarily mutually exclusive. Future work will enhance the usability of explanations for non-experts and explore severity estimation to increase the real-world clinical relevance._ [📜 Arxiv](https://arxiv.org/abs/) [📜 TSD 2025]()
 
-## <a name="environment"></a> 🛠️ Environment
+## <a name="preparation"></a> 🛠️ Preparation
 
+
+
+### Environment
 - Prepare the **conda environment** to run the experiments:
 
 ```
-conda create -n ssl-parkinson python=3.10
-conda activate ssl-parkinson
+conda create -n RECAPD python=3.10
+conda activate RECAPD
 pip install -r requirements.txt
 ```
 
-## <a name="preparation"></a> 🚀 Preparation
+> **Note:** This repository is primarily built upon and extends the work from [interpreting-ssl-parkinson-speech](https://github.com/david-gimeno/interpreting-ssl-parkinson-speech).
+
+
+### Preprocessing
 
 Data preprocessing, dataset split, feature extraction scripts. As an example, we provide the scripts aimed to address our GITA corpus experiments:
 
@@ -46,6 +52,7 @@ We also include the scripts used to generate the split-mono training set describ
 	2.	Update the folder paths in the scripts above to point to your newly created segments so you can extract the corresponding features.
 
 Note that, to keep the overall pipeline straightforward, the split-mono task is not integrated into the scripts of Evaluation Protocol 1 introduced below.
+
 
 ## <a name="training_and_evaluation"></a> 🚀 Training and Evaluation
 
@@ -96,7 +103,7 @@ Wilcoxon signed-rank test example:
 - `scripts/evaluation/WS-rank.ipynb`
 
 A simple Visualization example:
-- ``
+- `scripts/interpretability/visual_example.ipynb`
 
 
 ## <a name="citation"></a> 📖 Citation
