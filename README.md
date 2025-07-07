@@ -20,7 +20,7 @@
 
 **Abstract.** _Parkinson's Disease (PD) affects over 10 million people globally, with speech impairments often preceding motor symptoms by years, making speech a valuable modality for early, non-invasive detection. While recent deep-learning models achieve high accuracy, they typically lack the explainability required for clinical use. To address this, we propose RECA-PD, a novel, robust, and explainable cross-attention architecture that combines interpretable speech features with self-supervised representations. RECA-PD matches state-of-the-art performance in Parkinson’s disease detection while providing explanations that are more consistent and more clinically meaningful. Additionally, we demonstrate that performance degradation in certain speech tasks (e.g., monologue) can be mitigated by segmenting long recordings. Our findings indicate that performance and explainability are not necessarily mutually exclusive. Future work will enhance the usability of explanations for non-experts and explore severity estimation to increase the real-world clinical relevance._ [📜 Arxiv Link](https://arxiv.org/abs/) [📜 TSD 2025 Link]()
 
-## <a name="preparation"></a> 🛠️ Preparation
+## <a name="environment"></a> 🛠️ Environment
 
 - Prepare the **conda environment** to run the experiments:
 
@@ -30,17 +30,31 @@ conda activate ssl-parkinson
 pip install -r requirements.txt
 ```
 
-## <a name="training"></a> 🚀 Training and Evaluation
+## <a name="preparation"></a> 🚀 Preparation
 
-To train and evaluate our proposed framework, we should follow a pipeline consisting of multiple steps, including data preprocessing, dataset split, feature extraction, as well as the ultimate training and evaluation. As an example, we provide the scripts aimed to address our GITA corpus experiments:
+Data preprocessing, dataset split, feature extraction scripts. As an example, we provide the scripts aimed to address our GITA corpus experiments:
 
 ```
 bash scripts/runs/dataset_preparation/gita.sh $DATASET_DIR $METADATA_PATH
 bash scripts/runs/feature_extraction/gita.sh
-bash scripts/runs/experiments/cross_full/gita.sh
 ```
 
 , where `$DATASET_DIR` and `$METADATA_PATH` refer to the directory containing all the audio waveform samples and the CSV including the corpus subject metadata, respectively. _Please, note that you have to convert the 1st sheet of the .xlsx provided in the GITA dataset to a .csv file._
+
+We also include the scripts used to generate the split-mono training set described in the paper. To train and test on this set:
+	1.	Follow the instructions in splits/gita-splitmono/README.md to generate the new audio segments.
+	2.	Update the folder paths in the scripts above to point to your newly created segments so you can extract the corresponding features.
+
+Note that, to keep the overall pipeline straightforward, the split-mono task is not integrated into the scripts of Evaluation Protocol 1 introduced below.
+
+## <a name="training and evaluation"></a> 🚀 Training and Evaluation
+
+We adopt two protocol to train and eval the 4 method introduced in paper, here we only showed the script of proposed method RECA-PD, others follow the same procedure with scripts in the same folders. Generated splits of 2 protocol are provided as splits/gita_splits1 and splits/gita_splits2 for replicate results.
+
+Training:
+
+
+Evaluation:
 
 In order to **evaluate your model** for a specific assessment task across all repetitions and folds, you can run the following command:
 
@@ -49,6 +63,11 @@ python scripts/evaluation/overall_performance.py --exps-dir ./exps/gita/cross_fu
 ```
 
 , where `$TASK` corresponds to the name of the target task you want to evaluate. You can always inspect the directory `scripts/evaluation/` to find other interesting scripts.
+
+
+A simple Visualization notebook:
+
+
 
 ## <a name="citation"></a> 📖 Citation
 
