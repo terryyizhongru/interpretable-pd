@@ -19,8 +19,8 @@ def build_model(config):
         model = SelfSSLModel(config)
     elif config.model == 'cross_full':
         model = CrossFullModel(config)
-    elif config.model == 'cross_token':
-        model = CrossTokenModel(config)
+    elif config.model == 'RECAPD':
+        model = RECAPD_Model(config)
     elif config.model == 'cross_full_fix':
         model = CrossFullModelFix(config)
     elif config.model == 'cross_full_fix_value':

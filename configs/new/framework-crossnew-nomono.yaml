@@ -1,0 +1,85 @@
+# -- task related
+tasks:
+
+ - name: SUSTAINED-VOWELS
+   features: ['Articulation', 'MonoLoudness', 'MonoPitch', 'Rhythm', 'VoiceQuality']
+
+ - name: WORDS
+   features: ['Articulation', 'MonoLoudness', 'MonoPitch', 'Rhythm', 'VoiceQuality']
+
+ - name: DDK
+   features: ['Articulation', 'MonoLoudness', 'MonoPitch', 'Rhythm', 'VoiceQuality']
+
+ - name: READ
+   features: ['Articulation', 'MonoLoudness', 'MonoPitch', 'Rhythm', 'VoiceQuality']
+
+ - name: SENTENCES
+   features: ['Articulation', 'MonoLoudness', 'MonoPitch', 'Rhythm', 'VoiceQuality']
+
+ - name: READ-TEXT
+   features: ['Articulation', 'MonoLoudness', 'MonoPitch', 'Rhythm', 'VoiceQuality']
+
+#  - name: MONOLOGUE
+#    features: ['Articulation', 'MonoLoudness', 'MonoPitch', 'Rhythm', 'VoiceQuality']
+
+# -- informed speech features related
+features:
+ - name: Articulation
+   input_dim: 48 # (1, 4) <-- (1, 488)
+   toolkit: disvoice
+   metadata: "./metadata/target_tokens/Articulation.csv"
+
+ - name: MonoLoudness
+   input_dim: 24 # (1, 14) <-- (1, 36)
+   toolkit: disvoice
+   metadata: "./metadata/target_tokens/MonoLoudness.csv"
+
+ - name: MonoPitch
+   input_dim: 18 # (1, 7) <-- (1, 28)
+   toolkit: disvoice
+   metadata: "./metadata/target_tokens/MonoPitch.csv"
+
+ - name: Rhythm
+   input_dim: 25 # (1, 10) <-- (1, 103)
+   toolkit: disvoice
+   metadata: "./metadata/target_tokens/Rhythm.csv"
+
+ - name: VoiceQuality
+   input_dim: 34 # (1, 10) <-- (1, 103)
+   toolkit: disvoice
+   metadata: "./metadata/target_tokens/VoiceQuality.csv"
+
+# -- self-supervised speech features related
+ssl_features: wav2vec
+ssl_features_conf:
+  input_dim: 1024 # (T, 1024)
+  layer_id: "layer07"
+
+# -- model architecture related
+model: cross_token
+model_conf:
+  dropout: 0.1
+  num_heads: 1
+  latent_dim: 1024
+
+# -- training settings related
+training_settings:
+  optimizer: 'adamw'
+  scheduler: 'onecycle'
+  anneal_strategy: 'cos'
+  loss_criterion: 'cross_entropy'
+  epochs: 5
+  batch_size: 8
+  accum_grad: 1
+  learning_rate: 0.0004
+  num_workers: 0
+
+# -- task related
+num_classes: 2
+class_names:
+ - HC
+ - PD
+seed: 42
+device: 'cuda'
+dtype: float32
+

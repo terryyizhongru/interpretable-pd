@@ -4,12 +4,12 @@ from .multiheaded_attention import MultiHeadedAttention
 import torch.nn as nn
 
 
-class CrossTokenModel(torch.nn.Module):
+class RECAPD_Model(torch.nn.Module):
     """SSL Embedding & Temporal Cross-Attention Model.
     """
 
     def __init__(self, config):
-        super(CrossTokenModel, self).__init__()
+        super(RECAPD_Model, self).__init__()
 
         self.config = config
         self.attn_type = self.config.model

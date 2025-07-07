@@ -10,7 +10,7 @@ tasks:
  - name: DDK
    features: ['Articulation', 'MonoLoudness', 'MonoPitch', 'Rhythm', 'VoiceQuality']
 
- - name: READ-TEXT
+ - name: READ
    features: ['Articulation', 'MonoLoudness', 'MonoPitch', 'Rhythm', 'VoiceQuality']
 
  - name: SENTENCES

@@ -10,7 +10,7 @@ tasks:
  - name: DDK
    features: [articulation, glottal, phonation, prosody]
 
- - name: READ-TEXT
+ - name: READ
    features: [articulation, glottal, phonation, prosody]
 
  - name: SENTENCES

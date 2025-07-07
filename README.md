@@ -49,9 +49,30 @@ Note that, to keep the overall pipeline straightforward, the split-mono task is 
 
 ## <a name="training and evaluation"></a> 🚀 Training and Evaluation
 
-We adopt two protocol to train and eval the 4 method introduced in paper, here we only showed the script of proposed method RECA-PD, others follow the same procedure with scripts in the same folders. Generated splits of 2 protocol are provided as splits/gita_splits1 and splits/gita_splits2 for replicate results.
 
-Training:
+We evaluate four methods (M1–M4) under two protocols as introduced in the paper.  
+Here, we show the scripts for the proposed method (RECA-PD); the other methods follow the same procedure within their respective folders.
+
+Generated splits for both protocols are available under:
+- `splits/gita_splits1/`
+- `splits/gita_splits2/`
+
+---
+
+## Training
+
+All training scripts are located in:  
+- `scripts/runs/experiments/training/protocol1/`  
+- `scripts/runs/experiments/training/protocol2/`  
+
+To train each method, run the corresponding shell script:
+
+| Method                         | Script                               |
+|--------------------------------|--------------------------------------|
+| **M1 (Base)**                  | `gita_base_M1.sh`                    |
+| **M2 (M1 + Fixed Softmax)**         | `gita_fix_softmax_M2.sh`             |
+| **M3 (M2 + InterpretableValue)**   | `gita_fix_interpretableValue_M3.sh`  |
+| **M4 (RECA-PD, proposed)**     | `gita_RECAPD_M4.sh`                  |
 
 
 Evaluation:
