@@ -12,13 +12,20 @@
 [🚀 Training and Evaluation](#training_and_evaluation) |
 [📖 Citation](#citation) |
 
+📣 _Accepted for [TSD 2025](https://www.kiv.zcu.cz/tsd2025/index.php)!_
+
 </div>
 
 ## <a name="intro"></a> 📘 Introduction
 
 <div align="center"> <img src="docs/TSD-V1.2.drawio.png"  width="720"> </div>
 
-**Abstract.** _Parkinson's Disease (PD) affects over 10 million people globally, with speech impairments often preceding motor symptoms by years, making speech a valuable modality for early, non-invasive detection. While recent deep-learning models achieve high accuracy, they typically lack the explainability required for clinical use. To address this, we propose RECA-PD, a novel, robust, and explainable cross-attention architecture that combines interpretable speech features with self-supervised representations. RECA-PD matches state-of-the-art performance in Parkinson’s disease detection while providing explanations that are more consistent and more clinically meaningful. Additionally, we demonstrate that performance degradation in certain speech tasks (e.g., monologue) can be mitigated by segmenting long recordings. Our findings indicate that performance and explainability are not necessarily mutually exclusive. Future work will enhance the usability of explanations for non-experts and explore severity estimation to increase the real-world clinical relevance._ [📜 Arxiv](https://arxiv.org/abs/) [📜 TSD 2025]()
+**Abstract.** _Parkinson's Disease (PD) affects over 10 million people globally, with speech impairments often preceding motor symptoms by years, making speech a valuable modality for early, non-invasive detection. While recent deep-learning models achieve high accuracy, they typically lack the explainability required for clinical use. To address this, we propose RECA-PD, a novel, robust, and explainable cross-attention architecture that combines interpretable speech features with self-supervised representations. RECA-PD matches state-of-the-art performance in Parkinson’s disease detection while providing explanations that are more consistent and more clinically meaningful. Additionally, we demonstrate that performance degradation in certain speech tasks (e.g., monologue) can be mitigated by segmenting long recordings. Our findings indicate that performance and explainability are not necessarily mutually exclusive. Future work will enhance the usability of explanations for non-experts and explore severity estimation to increase the real-world clinical relevance._ [📜 Arxiv](https://arxiv.org/abs/2507.03594) 📜 TSD 2025 (to be update)
+
+## Acknowledgements
+
+Part of the project Responsible AI for Voice Diagnostics (RAIVD) with file number NGF.1607.22.013 of the research program NGF AiNed Fellowship Grants, which is financed by the Dutch Research Council (NWO). This work used the Dutch national e-infrastructure with the support of the SURF Cooperative using grant no. EINF-10519.
+
 
 ## <a name="preparation"></a> 🛠️ Preparation
 
@@ -108,5 +115,22 @@ A simple Visualization example:
 
 ## <a name="citation"></a> 📖 Citation
 
+If you use this dataset or methods from this project in academic work, please cite:
+ 
+### 📄 LaTeX (BibTeX)
+```bibtex
+@misc{zhong2025recapdrobustexplainablecrossattention,
+      title={RECA-PD: A Robust Explainable Cross-Attention Method for Speech-based Parkinson's Disease Classification}, 
+      author={Terry Yi Zhong and Cristian Tejedor-Garcia and Martha Larson and Bastiaan R. Bloem},
+      year={2025},
+      eprint={2507.03594},
+      archivePrefix={arXiv},
+      primaryClass={cs.SD},
+      url={https://arxiv.org/abs/2507.03594}, 
+}
+```
 
+### 📚 APA
+Zhong, T. Y., Tejedor-Garcia, C., Larson, M., & Bloem, B. R. (2025). RECA-PD: A robust explainable cross-attention method for speech-based Parkinson’s disease classification. arXiv. https://arxiv.org/abs/2507.03594
+Accepted at TSD 2025.
 
