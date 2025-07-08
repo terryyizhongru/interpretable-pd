@@ -1,9 +1,9 @@
 ## split-mono Scripts
 
+> **Note:** An expanded explanation of these scripts will be added later.
 
 First, split the wav files of Monologue to 10 wav segments, and extract features the same way as the PC-GITA dataset
 
-> **Note:** An expanded explanation of these scripts will be added later.
 
 ### `split.py`
 Expands each non-header row in a CSV file into **10 rows**, replacing  
